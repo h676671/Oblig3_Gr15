@@ -11,6 +11,7 @@ public class TabellMengde<T> implements MengdeADT<T> {
     public TabellMengde() {
         this(DEFAULT_SIZE);
     }
+
     @SuppressWarnings("unchecked")
     public TabellMengde(int size) {
         tab = (T[]) new Object[size];
@@ -32,6 +33,7 @@ public class TabellMengde<T> implements MengdeADT<T> {
         }
         return false;
     }
+
     @Override
     public boolean erDelmengdeAv(MengdeADT<T> annenMengde) {
         for (int i = 0; i < antall; i++) {
@@ -63,10 +65,10 @@ public class TabellMengde<T> implements MengdeADT<T> {
 
         boolean dis = true;
         //For at mengdene skal være disjunkte, kan de ikke ha noen elementer til felles.
-        for(int i = 0; i < antall; i++) {
+        for (int i = 0; i < antall; i++) {
             if (annenMengde.inneholder(tab[i])) {
-               dis = false;
-               break;
+                dis = false;
+                break;
             }
         }
         return dis;
@@ -122,19 +124,19 @@ public class TabellMengde<T> implements MengdeADT<T> {
         if (this.inneholder(element)) {
             return;
         }
-        if(antall == tab.length) {
-            tab = Arrays.copyOf(tab, tab.length *2);
-            }
+        if (antall == tab.length) {
+            tab = Arrays.copyOf(tab, tab.length * 2);
+        }
         tab[antall] = element;
         antall++;
-        }
+    }
 
 
     @Override
     public void leggTilAlleFra(MengdeADT<T> annenMengde) {
 
         for (T element : tab) {
-            if(!annenMengde.inneholder(element)) {
+            if (!annenMengde.inneholder(element)) {
                 annenMengde.leggTil(element);
             }
         }
@@ -146,7 +148,7 @@ public class TabellMengde<T> implements MengdeADT<T> {
 
         // Finne (indeksen til) den som skal slettes og lagre den.
         int index = -1;
-        for(int i = 0; i < antall; i++) {
+        for (int i = 0; i < antall; i++) {
             if (element.equals(tab[i])) {
                 index = i; //lagrer indekspossisjonen
             }
@@ -156,7 +158,7 @@ public class TabellMengde<T> implements MengdeADT<T> {
             return null;
         }
         //flytter det bakerste elementet til elementes possisjon. Sletter bakerst element.
-        tab[index] = tab[antall-1];
+        tab[index] = tab[antall - 1];
         antall--;
         return element;
     }
