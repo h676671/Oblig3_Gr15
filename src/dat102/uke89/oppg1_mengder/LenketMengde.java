@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 public class LenketMengde<T> implements MengdeADT<T>{
 
+    //Nested class @*
     private class Node{
 
         private T data;
@@ -32,7 +33,7 @@ public class LenketMengde<T> implements MengdeADT<T>{
     }
 
     @Override
-    //SEX.inneholder("hei");
+    //.inneholder("hei");
     public boolean inneholder(T element) {
         Node temp = forste;
         while (forste != null) {
@@ -171,7 +172,7 @@ public class LenketMengde<T> implements MengdeADT<T>{
     }
 
     @Override
-    public boolean fjern(T element) {
+    public T fjern(T element) {
 
         //1) Finn referanse til den som skal fjernes, null hvis ikke funnet.
         //   Nesten som da vi søkte etter "Anne". Kanskje vi burde laget en

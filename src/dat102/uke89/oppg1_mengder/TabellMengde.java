@@ -6,7 +6,7 @@ public class TabellMengde<T> implements MengdeADT<T> {
 
     private T[] tab;
     private int antall;
-    private static final int DEFAULT_SIZE = 30;
+    private static final int DEFAULT_SIZE = 10;
 
     public TabellMengde() {
         this(DEFAULT_SIZE);
@@ -61,13 +61,15 @@ public class TabellMengde<T> implements MengdeADT<T> {
     @Override
     public boolean erDisjunkt(MengdeADT<T> annenMengde) {
 
+        boolean dis = true;
         //For at mengdene skal være disjunkte, kan de ikke ha noen elementer til felles.
         for(int i = 0; i < antall; i++) {
             if (annenMengde.inneholder(tab[i])) {
-               return false;
+               dis = false;
+               break;
             }
         }
-        return true;
+        return dis;
     }
 
     @Override
@@ -117,18 +119,24 @@ public class TabellMengde<T> implements MengdeADT<T> {
 
     @Override
     public void leggTil(T element) {
-        for (int i = 0; i < tab.length; i++) {
-            if (!element.equals(tab[i])) {
-                tab[i] = element;
-            }
+        if (this.inneholder(element)) {
+            return;
         }
-    }
+        if(antall == tab.length) {
+            tab = Arrays.copyOf(tab, tab.length *2);
+            }
+        tab[antall] = element;
+        antall++;
+        }
+
 
     @Override
     public void leggTilAlleFra(MengdeADT<T> annenMengde) {
 
         for (T element : tab) {
-
+            if(!annenMengde.inneholder(element)) {
+                annenMengde.leggTil(element);
+            }
         }
 
     }
